@@ -1,0 +1,68 @@
+\section{Experimental protocol}
+
+\subsection{Datasets}
+
+In the current literature, there is no audio data annotated to perform SAD, OSD, MD, and ND simultaneously.
+Therefore, models are trained on several datasets to perform multilabel audio segmentation so that all the classes are represented.
+The teacher is trained on 4 different datasets listed in the table \ref{tab:datasets}.
+Due to the large amount of data, the teacher pre-training requires a lot of resources and a long training process to converge.
+We propose to train the proxy model on a subset of the training set.
+Only Albayzin and DiHard data are used for the knowledge distillation step.
+
+
+\begin{table}[hb]
+    \centering
+    \begin{tabular}{lcccccc}
+         \toprule
+         & \multicolumn{2}{c}{Model} & \multicolumn{4}{c}{Annotation} \\
+         \cmidrule{2-3}
+         \cmidrule{4-7}
+         Dataset & T & P & SAD & MD & ND & OSD \\
+         \midrule
+         Albayzin \cite{albayzin10,albayzin12} & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark &  \\
+         OpenBMAT \cite{openBMAT} & \checkmark & & & \checkmark & & \\
+         ALLIES \cite{larcher:hal-03262914_short} & \checkmark & & \checkmark & & & \checkmark \\
+         DiHard III \cite{ryant2021dihard} & \checkmark & \checkmark & \checkmark & & & \checkmark \\
+         \bottomrule
+    \end{tabular}
+    \caption{Datasets used to train both teacher (T) and proxy (P) models with the available labels in each of them.}
+    \label{tab:datasets}
+\end{table}
+
+\subsection{Model architectures}
+
+The teacher model is similar to \cite{lebourdais22_interspeech} and is composed of two main parts: feature extraction and sequence modeling.
+The former is performed using Large Wavlm pre-trained features \cite{chen2022wavlm}.
+The obtained output is a sequence of vectors of $D=1024$ dimensions.
+The latter part of the model inputs the sequence of Wavlm features and applies transformations to predict the segmentation.
+A bottleneck layer of 64 channels first transforms these features.
+3 TCN blocks process the output of the bottleneck layer \cite{bai_empirical_2018} composed of 5 1-d convolutional layers with exponentially increasing dilatation. 
+A 1-d convolution layer processes the output of the TCN blocks to project the hidden representations to the logits space.
+A sigmoid activation function is then applied to get normalized scores for each class.
+
+As described in section \ref{}, two types of proxy models are investigated.
+In the first approach, the proxy model inputs a spectrogram extracted on 64ms sliding windows with 20ms step.
+It is then processed by 4 block TCN models where each block comprises 4 layers.
+The bottleneck and hidden layer are composed of 128 and 256 channels respectively.
+The second approach uses Wavlm features from the teacher as input.
+In this case, the TCN model is smaller, with 2 blocks of 3 1-d convolution layers. 
+The bottleneck and hidden layer are composed of 64 and 128 channels respectively.
+
+\subsection{NMF pre-training}
+
+As previously introduced, the $\mathbf{W}$ dictionary is pre-trained to map the embedding space to the spectrogram space.
+Two approaches were investigated.
+First, we allowed the $\mathbf{W}$ dictionary to be trained with the proxy model.
+In this case, the dictionary is implemented as a linear layer with no bias.
+Second, the dictionary is pre-trained with the standard NMF approach and fixed during the proxy model training.
+The pre-training is performed on a subset of Aragon Radio.
+We select segments between 1s and 4s representing each type of class.
+In practice, the subset is built with 1200 segments with 16\% of speech and 42\% of music and noise.
+For each approach, the NMF rank is fixed at $K=256$.
+
+
+\subsection{Evaluation procedure}
+
+To evaluate the segmentation performance, both teacher and proxy models are evaluated following the same protocol.
+Models are evaluated on Aragon Radio, DiHard III, and Allies clean test sets.
+The two first datasets follow the split proposed for the original challenges \cite{albayzin12,ryant2021dihard} while the last one is a selection of files that have been re-annotated for segmentation.

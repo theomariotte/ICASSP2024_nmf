@@ -1,0 +1,72 @@
+% Template for ICASSP-2021 paper; to be used with:
+%          spconf.sty  - ICASSP/ICIP LaTeX style file, and
+%          IEEEbib.bst - IEEE bibliography style file.
+% --------------------------------------------------------------------------
+\documentclass{article}
+\usepackage{spconf,amsmath,amssymb,amsfonts}
+\usepackage{cite}
+\usepackage{tabularray}
+\usepackage{graphicx}
+% Example definitions.
+% --------------------
+
+
+% Title.
+% ------
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{subcaption}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+%\title{Towards acoustic segmentation explanation through non-negative matrix factorization}
+\title{An explainable proxy model for multilabel acoustic segmentation}
+%
+% Single address.
+% ---------------
+%
+% For example:
+% ------------
+%\address{School\\
+%	Department\\
+%	Address}
+%
+% Two addresses (uncomment and modify for two-address case).
+% ----------------------------------------------------------
+% \twoauthors
+ % {M. Lebourdais,\\\textit{M. Tahon, A. Laurent, S. Meignier, A. Larcher}}
+	% {Le Mans Université\\
+	% LIUM}
+ % {T. Mariotte,\\\textit{S. Montrésor, J-H. Thomas}}
+	% {Le Mans Université\\
+	% LAUM}
+
+\name{Théo Mariotte, Antonio Almudevar, Marie Tahon}
+
+\address{$^{\dagger}$LIUM, $^{\diamond}$LAUM UMR 6613 IA-GS, Le Mans Université\\
+theo.mariotte@univ-lemans.fr
+}
+
+\begin{document}
+\ninept
+
+\maketitle
+%
+\begin{abstract}
+\end{abstract}
+%
+\begin{keywords}
+acoustic segmentation, explainability, non-negative matrix factorization
+\end{keywords}
+%
+
+\input{01_intro}
+\input{02_model}
+\input{03_protocol}
+\input{04_results}
+\input{05_explain}
+\input{06_Conclusion}
+\newpage
+\bibliographystyle{IEEEbib}
+\bibliography{habi}
+%\bibliography{strings}
+\end{document}

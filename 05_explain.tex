@@ -1,0 +1,46 @@
+\section{Decision explanation}
+
+This section describes the explanation extraction process to identify the relevant frequency bins for the segmentation.
+
+\subsection{Explanation extraction}
+
+The student model is built on the NMF framework.
+This allows to map the $\mathbf{H}$ embedding to the frequency domain.
+Furthermore, the segmentation prediction is obtained from this embedding with the $\Theta$ linear transformation.
+The first step in the explanation process is to identify the $k\in [1,\cdots, K]$ NMF components that are the most relevant for classification.
+We first apply a pooling operation to the embedding by averaging it over the time dimension: $z_k = \frac{1}{T}\sum_{t=1}^T H_t$.
+To identify the relevant components to detect the class $c$, we define a relevance vector $\mathbf{r}_c=[r_{1,c}, \cdots, r_{k,c}, \cdots r_{K,c}]$ in which each element is computed as:
+\begin{equation}
+    r_{k,c} = z_k \times \theta_{k,c},
+    \label{eq:relevance_vector}
+\end{equation}
+where $\theta_{k,c}$ is the $k$-th weight of the linear layer associated to class $c$.
+
+The most relevant components are selected by applying a threshold $\tau$ to \eqref{eq:relevance_vector}. 
+A new vector $\mathbf{R}_{c,\tau}= [R_{1,c,\tau},\cdots,R_{k,c,\tau},\cdots, R_{K,c,\tau}]$ in which the $k$-th element is obtained as:
+\begin{equation}
+    R_{k,c,\tau} = 
+    \begin{cases}
+        r_{r,k} & \text{if } r_{r,k} > \tau \\
+        0       & \text{otherwise}. \\
+    \end{cases}
+\end{equation}
+
+\subsection{Segment-level explanation}
+
+The filtered relevance vector $\mathbf{R}_{c,\tau}$ belongs to the same space as the $\mathbf{H}$ embedding.
+Hence, it can be projected to the frequency domain by the following NMF linear transformation:
+\begin{equation}
+    \mathbf{X}_{c,\tau} = \mathbf{W}\mathbf{R}_{c,\tau},
+\end{equation}
+where $\mathbf{X}_{c,\tau}\in\mathbb{R}^{K}$ is the projection of the relevant components given $c$ and $\tau$ in the frequency domain.
+This representation highlights the relevant frequency bin to detect a given class.
+
+After identifying the relevant components, it is necessary to measure the confidence in the model decision.
+The confidence measure is obtained by keeping the relevant components in the $\mathbf{H}$ embedding and forwarding this filtered embedding $\mathbf{H}_{c,\tau}$ in classification linear layer such that $\tilde{\mathbf{y}}_{c,\tau}=\Theta(\mathbf{H}_{c,\tau})$.
+Thus, the frequency-domain explanation $\mathbf{X}_{c,\tau}$ can be compared to the model output for a given selection $\tau$.
+
+
+
+
+\subsection{Global explanation}

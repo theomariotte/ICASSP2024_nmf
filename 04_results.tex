@@ -1,0 +1,31 @@
+\section{Segmentation performance}
+
+
+\begin{table*}[ht]
+    \centering
+    \begin{tabular}{lcccccccc}
+        \toprule
+         & \multicolumn{3}{c}{Aragon Radio} & \multicolumn{2}{c}{DiHard III} & \multicolumn{2}{c}{Allies Clean Test}\\
+         \cmidrule{2-4}
+         \cmidrule{5-6}
+         \cmidrule{7-8}
+         Model ID & SAD & ND & MD & SAD & OSD & SAD & OSD & HM\\  
+         \midrule
+         Teacher & \textbf{96.8} & 78.6 & \textbf{93.2} & \textbf{96.9} & 60.7 & \textbf{98.8} & 58.6\\
+         \midrule
+         Spectrogram  & 96.3 & 73.0 &  87.6 & 95.5 & 40.1 & 94.9 & 14.1 & 0.509 \\
+         Wavlm & \textbf{96.8} & \textbf{79.5} & \textbf{93.1} & \textbf{96.9} & \textbf{61.4} & 96.2 & \textbf{67.0} & 0.801\\
+         \bottomrule
+    \end{tabular}
+    \caption{AragonRadio performance}
+    \label{tab:seg_results}
+\end{table*}
+
+
+\subsection{Performance of the spectrogram-based student}
+
+
+
+\subsection{Performance of the WavLM-based student}
+
+
