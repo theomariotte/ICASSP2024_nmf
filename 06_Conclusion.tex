@@ -1,3 +1,11 @@
 \section{Conclusions}
 \label{sect:ccl}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+This paper proposes a set of explainable proxy models for multilabel audio segmentation.
+The proxy is trained to fit the logits distribution of a pre-trained black-box teacher model.
+Non-negative Matrix Factorization (NMF) is the core of this approach.
+It allows to map the embedding used for the decision-making process to the frequency domain.
+Hence, one can easily identify the relevant frequency bins used to predict the segmentation.
+Experiments conducted on AragonRadio and DiHard III datasets show that the proxy model offers the same performance as the teacher, while providing strong explainability capacities.
+
+In the future, we plan to improve the spectrogram reconstruction in order to extract exlpanations in the audio domain.
+Other training strategies will also be investigated to improve the segemntation performance of the spectrogram-based model.
