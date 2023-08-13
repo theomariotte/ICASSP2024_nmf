@@ -1,6 +1,19 @@
 \section{Segmentation performance}
 \label{sect:perf}
 
+This section compares the performance of each type of proxy model with respect to the teacher model.
+The SAD, ND, MD, and OSD performances are presented in the table \ref*{tab:seg_results}.
+
+The teacher's performance is considered the baseline.
+The proxy models are expected to reach similar performance as the teacher.
+
+The spectrogram-based system (spec.) shows 96.3\% and 95.5\% F1-score on the SAD task on DiHard and AragonRadio respectively.
+This represents a little degradation with respect to the teacher.
+The ND (73.0\%) and MD (87.6\%) are also degraded by an absolute -5,6\% compared to the teacher.
+The strongest degradation is observed on the OSD with a 40.1\% F1-score.
+The spectrogram-based model degrades the performance with respect to the teacher.
+% discuss these results
+
 \begin{table}[ht]
     \centering
     \begin{tabular}{lccccc}
@@ -20,12 +33,3 @@
     \caption{AragonRadio performance}
     \label{tab:seg_results}
 \end{table}
-
-
-\subsection{Performance of the spectrogram-based student}
-
-
-
-\subsection{Performance of the WavLM-based student}
-
-
