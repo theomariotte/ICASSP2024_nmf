@@ -1,16 +1,16 @@
 \section{NMF-based explainable model}
-
+\label{sect:models}
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{figs/nmf_model_icassp.pdf}
-    \caption{Diagram of the proposed architecture for NMF-based multilabel segmentation explanation.}
+    \caption{Diagram of the proposed architecture for NMF-based multi-label segmentation explanation. The \textbf{A} and \textbf{B} branches represent the spectrogram and Wavlm-based proxy models respectively.}
     \label{fig:enter-label}
 \end{figure}
 
 \subsection{Multilabel segmentation formulation}
 
 Acoustic segmentation is solved as a multilabel framewise classification task.
-Let $\mathcal{S}=\{\mathbf{X}, \mathbf{y}\}$ be a training set composed of sequences of acoustic features $\mathbf{X}\in\mathbb{R}^{D\times T}$, where $D$ is the feature vector dimension and $T$ the number of frames, and aligned annotations $\mathbf{y}\in \mathbb{R}^{C\times T}$, with $C$ being the number of classes. 
+Let $\mathcal{S}=\{\mathbf{X}, \mathbf{y}\}$ be a training set composed of sequences of acoustic features $\mathbf{X}\in\mathbb{R}^{D\times T}$, where $D$ is the feature vector dimension and $T$ the number of frames, and the aligned annotations $\mathbf{y}\in \mathbb{R}^{C\times T}$, with $C$ being the number of classes. 
 Let $f:\mathbb{R}^{D\times T} \rightarrow \mathbb{R}^{C\times T}$ be a parametric function that estimates the logits for each class from the sequence of features such as $\hat{\mathbf{y}}=f(\mathbf{X})$.
 The parameters of $f$ are optimized to minimize a loss function $\mathcal{L}(\hat{\mathbf{y}},\mathbf{y})$, usually cross-entropy, with an iterative algorithm.
 

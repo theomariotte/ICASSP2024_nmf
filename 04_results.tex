@@ -1,25 +1,25 @@
 \section{Segmentation performance}
+\label{sect:perf}
 
-
-\begin{table*}[ht]
+\begin{table}[ht]
     \centering
-    \begin{tabular}{lcccccccc}
+    \begin{tabular}{lccccc}
         \toprule
-         & \multicolumn{3}{c}{Aragon Radio} & \multicolumn{2}{c}{DiHard III} & \multicolumn{2}{c}{Allies Clean Test}\\
+         & \multicolumn{3}{c}{Aragon Radio} & \multicolumn{2}{c}{DiHard III} \\
          \cmidrule{2-4}
          \cmidrule{5-6}
-         \cmidrule{7-8}
-         Model ID & SAD & ND & MD & SAD & OSD & SAD & OSD & HM\\  
+         Model & SAD & ND & MD & SAD & OSD \\  
          \midrule
-         Teacher & \textbf{96.8} & 78.6 & \textbf{93.2} & \textbf{96.9} & 60.7 & \textbf{98.8} & 58.6\\
+         Teacher & \textbf{96.8} & 78.6 & \textbf{93.2} & \textbf{96.9} & 60.7\\
          \midrule
-         Spectrogram  & 96.3 & 73.0 &  87.6 & 95.5 & 40.1 & 94.9 & 14.1 & 0.509 \\
-         Wavlm & \textbf{96.8} & \textbf{79.5} & \textbf{93.1} & \textbf{96.9} & \textbf{61.4} & 96.2 & \textbf{67.0} & 0.801\\
+         Spec. & 96.3 & 73.0 &  87.6 & 95.5 & 40.1\\
+         Wavlm train & 96.1 & 72.6 & 93.0 & 96.7 & 60.5\\
+         Wavlm & \textbf{96.8} & \textbf{79.5} & \textbf{93.1} & \textbf{96.9} & \textbf{61.4} \\
          \bottomrule
     \end{tabular}
     \caption{AragonRadio performance}
     \label{tab:seg_results}
-\end{table*}
+\end{table}
 
 
 \subsection{Performance of the spectrogram-based student}

@@ -1,14 +1,13 @@
 \section{Experimental protocol}
-
+\label{sect:protocol}
 \subsection{Datasets}
 
 In the current literature, there is no audio data annotated to perform SAD, OSD, MD, and ND simultaneously.
 Therefore, models are trained on several datasets to perform multilabel audio segmentation so that all the classes are represented.
-The teacher is trained on 4 different datasets listed in the table \ref{tab:datasets}.
-Due to the large amount of data, the teacher pre-training requires a lot of resources and a long training process to converge.
+The teacher is trained on 4 datasets listed in the table \ref{tab:datasets}.
+Due to the large amount of data, the teacher pre-training requires a lot of resources and a lengthy training process to converge.
 We propose to train the proxy model on a subset of the training set.
 Only Albayzin and DiHard data are used for the knowledge distillation step.
-
 
 \begin{table}[hb]
     \centering
@@ -64,5 +63,5 @@ For each approach, the NMF rank is fixed at $K=256$.
 \subsection{Evaluation procedure}
 
 To evaluate the segmentation performance, both teacher and proxy models are evaluated following the same protocol.
-Models are evaluated on Aragon Radio, DiHard III, and Allies clean test sets.
-The two first datasets follow the split proposed for the original challenges \cite{albayzin12,ryant2021dihard} while the last one is a selection of files that have been re-annotated for segmentation.
+The models are evaluated on Aragon Radio and DiHard III test sets.
+The test partitions follow the split proposed for the original challenges \cite{albayzin12,ryant2021dihard}.
