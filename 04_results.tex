@@ -33,3 +33,17 @@ The spectrogram-based model degrades the performance with respect to the teacher
     \caption{AragonRadio performance}
     \label{tab:seg_results}
 \end{table}
+
+Using Wavlm features as input of the proxy model drastically improves the segmentation performance.
+When the NMF dictionary is trained simultaneously as the segmentation task, the proxy model reaches 96.1\% and 96.7\% F1-score on SAD.
+The ND peformance remains lower than the teacher with a 72.6\% F1-score, which represents an absolute -6\% degradation.
+The MD and OSD performances are similar to the teacher with 93.0\% and 60.5\% F1-score respectively.
+While showing similar performance as the teacher, training the NMF dictionary degrades the noise detection.
+
+When the NMF dictionary is pre-learned, the proxy model delivers similar or even better segmentation performance as the teacher.
+The proxy model reaches a 79.5\% F1-score on ND (+0.9\% absolute improvement w.r.t. the teacher), and 61.4\% F1-score on OSD.
+This system shows the best segmentation performance among all the models.
+
+The Wavlm-based proxy models delivers the best performance when the dictionary is pre-learned.
+Learning a common embedding for classification and spectrogram reconstruction is seems easier under these conditions.
+This last model is kept for the explanation extraction presented in the following section.
