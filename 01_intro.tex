@@ -14,16 +14,19 @@ We propose a proxy explainable model which is trained to fit the original model 
 %Historically, audio signal segmentation is performed using statistical models.
 Early studies on speech \cite{sohn1999statistical}, overlapped speech \cite{charlet_impact_2013}, and music \cite{lavner2009decision} segmentation are focused on the statistical modeling of manually extracted acoustic features.
 Currently, the segmentation is performed with neural networks and supervised learning.
-Most approaches consist of the classification of acoustic features at the frame level.
-Each task was first solved separately as binary frame classification tasks.
+Most of these approaches consist of the classification of acoustic features at the frame level.
+Each task can be solved separately as binary frame classification tasks.
 SAD \cite{lavechin2019end}, OSD \cite{bullock_overlap-aware_2020,lebourdais22_interspeech}, MD \cite{jang2019music,de2019exploring}.
-Several approaches have also been proposed to solve multiple tasks simultaneously.
+More recent approaches propose to solve multiple tasks simultaneously. 
+% I included the following definition to be clear on the difference between multiclass and multilabel
+On the one hand, the multiclass model predicts a single class, and the intersection between classes is empty. 
+On the other hand, the solution is multilabel when the model predicts the presence of each class independently of the others, the intersection between classes can be not empty.
 For example, in \cite{gimeno2020multiclass}, authors propose to segment speech, music, and noise with a single multiclass model.
 A few works also report joint SAD and OSD \cite{jung21_interspeech,bredin21_interspeech,lebourdais2023joint}.
 In this paper, SAD, OSD, MD, and ND are simultaneously solved as a multilabel frame-classification task.
 
 The proposed approach aims to train an explainable proxy model from the black-box pre-trained segmentation system.
-While many works have been conducted in explaining neural networks \cite{}, the literature is limited in the audio domain.
+While many works have been conducted in explaining neural networks in vision \cite{ribeiro_why_2016} and NLP \cite{murphy_learning_2012}, the literature is limited in the audio domain.
 The first intents are focused on saliency map extraction to reveal what information is used in the output \cite{}.
 Recently, a few explainable models have been developed like APNet \cite{zinemanas2021interpretable}, which extends the prototypical network to the audio domain.
 The proposed architecture is mainly inspired by \cite{parekh2023tackling}.
@@ -37,12 +40,12 @@ The former inputs a spectrogram as features and the latter uses the teacher's Wa
 The proxy models are inspired by \cite{parekh2023tackling}.
 We demonstrate that proxy models provide similar or even better performance as the original model while being smaller and explainable.
 We show that the relevant information for classification can be mapped to the spectral domain.
-The relevance is confirmed by a confidence measure.
-To the best of our knowledge, this is the first intent to design an explainable neural segmentation model.  
+A confidence measure confirms the relevant components selection.
+To the best of our knowledge, this is the first intent to design an explainable neural multilabel segmentation model.  
 
-This paper is arranged as follows: sect. \ref{sect:models} presents the structure of the system along with the proxy model training strategy.
-Sect. \ref{sect:protocol} introduces the experimental protocol and sect. \ref{sect:perf} the segmentation results. 
-Sect. \ref{sect:explain} demonstrates the explainability capacities of the proposed system.
+This paper is arranged as follows: sec. \ref{sect:models} presents the structure of the system along with the proxy model training strategy.
+Sec. \ref{sect:protocol} introduces the experimental protocol and sec. \ref{sect:perf} the segmentation results. 
+Sec. \ref{sect:explain} demonstrates the explainability capacities of the proposed system.
 
 
 
