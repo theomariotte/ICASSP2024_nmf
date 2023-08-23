@@ -1,7 +1,7 @@
 \section{Introduction}
 
 In the last few years, multimedia data collection has shown a noticeable increase.
-Large-scale multimedia data collection requires storing and indexing massive databases.
+Large-scale multimedia data collection requires storing and indexing massive databases from the segmentation of the audio signal to speaker labeling.
 Annotating this data is a tiresome task and can hardly be conducted manually.
 Hence, the need for automatic approaches is growing.
 The prevailing methodologies in the present context are primarily centered around neural networks.
@@ -12,7 +12,7 @@ This task is initially performed by a black-box neural model.
 We propose a proxy explainable model which is trained to fit the original model distribution while showing noticeable explanation capacities. 
 
 %Historically, audio signal segmentation is performed using statistical models.
-Early studies on speech \cite{sohn1999statistical}, overlapped speech \cite{charlet_impact_2013}, and music \cite{lavner2009decision} segmentation are focused on the statistical modeling of manually extracted acoustic features.
+Early studies on speech \cite{sohn1999statistical}, overlapped speech \cite{charlet_impact_2013}, and music \cite{lavner2009decision} segmentation are focused on the statistical modeling of handcrafted acoustic features.
 Currently, the segmentation is performed with neural networks and supervised learning.
 Most of these approaches consist of the classification of acoustic features at the frame level.
 Each task can be solved separately as binary frame classification tasks.
@@ -27,14 +27,14 @@ In this paper, SAD, OSD, MD, and ND are simultaneously solved as a multilabel fr
 
 The proposed approach aims to train an explainable proxy model from the black-box pre-trained segmentation system.
 While many works have been conducted in explaining neural networks in vision \cite{ribeiro_why_2016} and NLP \cite{murphy_learning_2012}, the literature is limited in the audio domain.
-The first intents are focused on saliency map extraction to reveal what information is used in the output \cite{}.
+The first intents are focused on saliency map extraction to reveal what information is used in the output \cite{ribeiro_why_2016,qi2019visualizing}.
 Recently, a few explainable models have been developed like APNet \cite{zinemanas2021interpretable}, which extends the prototypical network to the audio domain.
 The proposed architecture is mainly inspired by \cite{parekh2023tackling}.
 The authors propose to explain an audio classification model by a proxy model which is optimized to classify audio scenes while reconstructing the audio with the non-negative matrix factorization framework \cite{lee2000algorithms}.
 This model can be used both as post-hoc and by design explainability.
 
 In this paper, we propose to train an explainable proxy model from a pre-trained multilabel segmentation model (designated as the teacher).
-This model inputs Wavlm pre-trained features and outputs the pseudo probability of each class.
+This model inputs Wavlm pre-trained features \cite{chen2022wavlm} and outputs the pseudo probability of each class.
 Two types of proxy models are investigated.
 The former inputs a spectrogram as features and the latter uses the teacher's Wavlm outputs.
 The proxy models are inspired by \cite{parekh2023tackling}.
